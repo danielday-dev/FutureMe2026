@@ -10,8 +10,10 @@ public class DialogueManagerScript : MonoBehaviour
     public static DialogueManagerScript Instance;
     public bool ActiveDialogue = false;
     int CurrentCharacterIndex = 0;
+    int SelectedIndex = 0;
     string DisplayText = "";
     bool ChoiceNeeded = false;
+    bool Correct = false;
 
     public Dictionary<int, Choice> Choices = new Dictionary<int, Choice>();
     Choice Choice0 = new Choice
@@ -22,13 +24,16 @@ public class DialogueManagerScript : MonoBehaviour
             {"B", "I pick letter B"},
             {"C", "I pick letter C"}
         },
-        CorrectAnswer = "C"
+        CorrectAnswer = "B"
     };
     
     string[] exampleConvo =
     {
         "Greetings.",
-        "Pick one of these letters please...-Choice=0"
+        "Pick one of these letters please...-Choice=0",
+        "CorrectAnswer=Good choice.",
+        "IncorrectAnswer=To each their own I suppose",
+        "Thank you for participating."
     };
 
     void Start()
@@ -53,6 +58,16 @@ public class DialogueManagerScript : MonoBehaviour
             int ChoiceIndex = 0;
             //If the line we're showing contains a choice, we only display the line
             //then we take note of which choice it is for later
+            if (CurrentLine.Contains("CorrectAnswer=") && !Correct)
+            {
+                continue;
+            }
+            else if (CurrentLine.Contains("IncorrectAnswer=") && Correct)
+            {
+                continue;
+            }
+            CurrentLine = CurrentLine.Replace("CorrectAnswer=", "");
+            CurrentLine = CurrentLine.Replace("IncorrectAnswer=", "");
             if (CurrentLine.Contains("-Choice="))
             {
                 ChoiceNeeded = true;
@@ -72,8 +87,14 @@ public class DialogueManagerScript : MonoBehaviour
                     yield return TypewriteDialogue(option.Value, option.Key);
                 }
                 yield return WaitForChoice();
+                string[] ChoiceLetters = {"A", "B", "C"};
+                if (ChoiceLetters[SelectedIndex] == ChoiceBeingMade.CorrectAnswer)
+                {
+                    Correct = true;
+                }
             }
         }
+        DialogueDisplayScript.Instance.ShowLine("", "main");
         ActiveDialogue = false;
     }
 
@@ -86,7 +107,7 @@ public class DialogueManagerScript : MonoBehaviour
             DialogueDisplayScript.Instance.ChoiceB,
             DialogueDisplayScript.Instance.ChoiceC    
         };
-        int SelectedIndex = 0;
+        SelectedIndex = 0;
         while (true)
         {   
             foreach (TMP_Text Box in ChoiceBoxes)
@@ -115,11 +136,27 @@ public class DialogueManagerScript : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                foreach (TMP_Text Box in ChoiceBoxes)
+                {
+                    Box.text = "";
+                }
                 break;
             }
             yield return null;
         }
         
+    }
+
+    private IEnumerator ProgressDialogue()
+    {
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                break;
+            }
+            yield return null;
+        }
     }
     private IEnumerator TypewriteDialogue(string CurrentLine, string TextLocation)
     {
@@ -134,6 +171,13 @@ public class DialogueManagerScript : MonoBehaviour
             DialogueDisplayScript.Instance.ShowLine(DisplayText, TextLocation);
             yield return new WaitForSeconds(0.05f);
         }
-        yield return new WaitForSeconds(2);
+        if (TextLocation != "main")
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        else
+        {
+            yield return ProgressDialogue();
+        }
     }
 }

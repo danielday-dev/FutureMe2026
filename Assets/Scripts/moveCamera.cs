@@ -9,9 +9,8 @@ public class moveCamera : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        print(cameraPosition.position);
-        print(transform.position);
-        print(transform.position);
+        //print(cameraPosition.position);
+        //print(transform.position);
         transform.position = cameraPosition.position;
     }
 }

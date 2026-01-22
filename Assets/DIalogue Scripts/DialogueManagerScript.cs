@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System;
+using TMPro;
 
 public class DialogueManagerScript : MonoBehaviour
 {
@@ -27,9 +28,6 @@ public class DialogueManagerScript : MonoBehaviour
     string[] exampleConvo =
     {
         "Greetings.",
-        "This is a test, to see if I can make scrolling dialogue",
-        "Let's see, shall we...",
-        "Making a really long line for the express purpose of testing whether it will automatically take a new line and to figure out what happens if we get just a little bit too long.",
         "Pick one of these letters please...-Choice=0"
     };
 
@@ -73,12 +71,56 @@ public class DialogueManagerScript : MonoBehaviour
                 {
                     yield return TypewriteDialogue(option.Value, option.Key);
                 }
+                yield return WaitForChoice();
             }
         }
         ActiveDialogue = false;
     }
 
-
+    private IEnumerator WaitForChoice()
+    {   
+        Color DefaultColour = DialogueDisplayScript.Instance.MainText.color;
+        TMP_Text[] ChoiceBoxes =
+        {
+            DialogueDisplayScript.Instance.ChoiceA,
+            DialogueDisplayScript.Instance.ChoiceB,
+            DialogueDisplayScript.Instance.ChoiceC    
+        };
+        int SelectedIndex = 0;
+        while (true)
+        {   
+            foreach (TMP_Text Box in ChoiceBoxes)
+            {
+                Box.color = DefaultColour;
+                Box.fontStyle = FontStyles.Normal;
+            }
+            TMP_Text Selected = ChoiceBoxes[SelectedIndex];
+            Selected.fontStyle = FontStyles.Italic;
+            Selected.color = Color.white;
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                SelectedIndex++;
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                SelectedIndex--;
+            }
+            if (SelectedIndex > 2)
+            {
+                SelectedIndex = 0;
+            }
+            else if (SelectedIndex < 0)
+            {
+                SelectedIndex = 2;
+            }
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                break;
+            }
+            yield return null;
+        }
+        
+    }
     private IEnumerator TypewriteDialogue(string CurrentLine, string TextLocation)
     {
         CurrentCharacterIndex = 0;

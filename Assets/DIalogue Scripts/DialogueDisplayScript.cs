@@ -1,8 +1,14 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DialogueDisplayScript : MonoBehaviour
 {
+    void Start()
+    {
+        
+    }
     public static DialogueDisplayScript Instance;
 
     public TMP_Text MainText;

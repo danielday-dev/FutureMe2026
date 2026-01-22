@@ -32,6 +32,7 @@ public class playerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         rb.linearDamping = groundDrag;
+        findObjects();
         
     }
 
@@ -62,6 +63,69 @@ public class playerMovement : MonoBehaviour
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
+    }
+
+    private void findObjects()
+    {
+        if (tryInteract(out Interactable interactable))
+        {
+            /*
+             * 
+             * Here, it should update the HUD to show something like "E - use printer" etc.
+             * 
+             * 
+             */
+            if (Input.GetKeyDown(KeyCode.E)) //change thus
+            { 
+              //takes the player as an input, since most interactables
+              //will use them.
+                interactable.Execute(this.gameObject);
+            }
+            
+            
+        }
+
+        
+    }
+
+    private bool tryInteract(out Interactable interactable)
+    {
+
+        /*
+         * 
+         * This does a spherecast every tick. not exactly optimised. Could replace with a constant collision box in front of you instead.
+         * 
+         * 
+         */
+        interactable = null;
+
+        Vector3 loc = Camera.main.transform.position;
+        float radius = 0.5f;
+
+        //Ray rcast = new Ray(transform.position + rayOffset, playerCam.transform.forward);
+
+        //Overlap check first, since raycasts dont pick up if you are inside of it
+        Collider[] overlappedEnts = Physics.OverlapSphere(loc, radius);
+        foreach (Collider col in overlappedEnts)
+        {
+            if (col.TryGetComponent(out interactable))
+            {
+                return true;
+            }
+        }
+
+        //spherecast adds some leniancy so you dont have to aim well. might be useful for fast moving stuff.
+        if (Physics.SphereCast(Camera.main.transform.position, 0.5f, Camera.main.transform.forward, out RaycastHit hitObj, 1.2f)) //10f is the interaction distance
+        {
+            interactable = hitObj.collider.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        return false;
     }
 
 }

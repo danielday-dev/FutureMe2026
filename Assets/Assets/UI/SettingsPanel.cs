@@ -103,6 +103,6 @@ public class SettingsPanel : MonoBehaviour
 
     void quitGame()
     {
-        Application.Quit();
+        gameObject.SetActive(false);
     }
 }

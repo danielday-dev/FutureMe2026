@@ -8,9 +8,22 @@ public class minigameTemplate : MonoBehaviour
     [SerializeField] protected string[] gameObjective;
     [SerializeField] protected int objectivesCompleted;
 
-    public virtual void Execute(GameObject user)
+    public void nextObjective()
     {
-        return;
+        objectivesCompleted++;
+    }
+
+    public string currentObjective()
+    {
+        if (objectivesCompleted <= gameObjective.Length)
+        {
+            return gameObjective[objectivesCompleted];
+        }
+        else 
+        { 
+            return "finished"; 
+        }
+         
     }
 
     public string getName()

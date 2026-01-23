@@ -77,9 +77,11 @@ public class playerMovement : MonoBehaviour
              * 
              */
             if (Input.GetKeyDown(KeyCode.E)) //change thus
-            { 
-              //takes the player as an input, since most interactables
-              //will use them.
+            {
+                //takes the player as an input, since most interactables
+                //will use them.
+                //print("test");
+                //print(this.gameObject);
                 interactable.Execute(this.gameObject);
             }
             
@@ -92,8 +94,8 @@ public class playerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(playerCam.transform.position, 1f);
-        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * 3f, 1f);
-        Gizmos.DrawLine(playerCam.transform.position, playerCam.transform.position + playerCam.transform.forward * 3f);
+        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * 1.2f, 1f);
+        Gizmos.DrawLine(playerCam.transform.position, playerCam.transform.position + playerCam.transform.forward * 1.2f);
     }
 
     private bool tryInteract(out Interactable interactable)

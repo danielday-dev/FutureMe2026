@@ -12,16 +12,16 @@ public class pickUp : Interactable
         if (pickedUp)
         {
             minigame = GameObject.Find(minigameName);
-            activity = minigame.gameObject.GetComponent<shredPaper>();
+            activity = minigame.gameObject.GetComponent<minigameTemplate>();
             activity.nextObjective();
             print(activity.currentObjective());
         }
         return;
     }
 
-    public string getName()
-    {
-        return objectName;
-    }
+    //public string getName()
+    //{
+    //    return objectName;
+    //}
 
 }

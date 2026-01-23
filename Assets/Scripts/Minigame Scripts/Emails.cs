@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Emails : Interactable
+public class Emails : minigameTemplate
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 

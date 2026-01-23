@@ -3713,24 +3713,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5761615829856944086, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.083
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761615829856944086, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.105
+      value: 2.101
       objectReference: {fileID: 0}
     - target: {fileID: 8442284028005058744, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5234
+      value: 1.0780188
       objectReference: {fileID: 0}
     - target: {fileID: 8442284028005058744, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.637
       objectReference: {fileID: 0}
     - target: {fileID: 8442284028005058744, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.30915
+      value: 0.166
       objectReference: {fileID: 0}
     - target: {fileID: 8442284028005058744, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.766
       objectReference: {fileID: 0}
     - target: {fileID: 8442284028005058744, guid: 1a68e8133b0ed9045ba8ce9dd35c35a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35003,6 +35007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: shred Paper
   pickedUp: 0
+  minigameName: 
 --- !u!1001 &1870207253
 PrefabInstance:
   m_ObjectHideFlags: 0

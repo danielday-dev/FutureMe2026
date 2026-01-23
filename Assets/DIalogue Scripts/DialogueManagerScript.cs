@@ -14,19 +14,7 @@ public class DialogueManagerScript : MonoBehaviour
     string DisplayText = "";
     bool ChoiceNeeded = false;
     bool Correct = false;
-
-    public Dictionary<int, Choice> Choices = new Dictionary<int, Choice>();
-    Choice Choice0 = new Choice
-    {
-        Options = new Dictionary<string, string>
-        {
-            {"A", "I pick letter A"},
-            {"B", "I pick letter B"},
-            {"C", "I pick letter C"}
-        },
-        CorrectAnswer = "B"
-    };
-    
+    Dictionary<int, Choice> Choices;
     string[] exampleConvo =
     {
         "Greetings.",
@@ -38,8 +26,9 @@ public class DialogueManagerScript : MonoBehaviour
 
     void Start()
     {
-        Choices[0] = Choice0;
-        StartCoroutine(PlayConversationCoroutine(exampleConvo));
+        Choices = ConversationHandler.Instance.Choices;
+        ConversationHandler.Instance.MakeEmployeeConversation();
+        StartCoroutine(PlayConversationCoroutine(ConversationHandler.Instance.EmployeeConversation.ToArray()));
     }
 
     // Update is called once per frame
@@ -51,6 +40,7 @@ public class DialogueManagerScript : MonoBehaviour
     private IEnumerator PlayConversationCoroutine(string[] convo)
     {
         ActiveDialogue = true;
+        DialogueDisplayScript.Instance.DialogueBox.enabled = true;
         foreach (string Line in convo)
         {   
             string CurrentLine = Line;
@@ -96,6 +86,7 @@ public class DialogueManagerScript : MonoBehaviour
         }
         DialogueDisplayScript.Instance.ShowLine("", "main");
         ActiveDialogue = false;
+        DialogueDisplayScript.Instance.DialogueBox.enabled = false;
     }
 
     private IEnumerator WaitForChoice()

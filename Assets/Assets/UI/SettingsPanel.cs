@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class SettingsPanel : MonoBehaviour
 {
+    [SerializeField] private gameManager gameManager;
+    
     [SerializeField] private Toggle invertXToggle;
     [SerializeField] private Toggle invertYToggle;
     [SerializeField] private Slider cameraSensitivitySlider;
@@ -17,7 +19,7 @@ public class SettingsPanel : MonoBehaviour
     void Awake()
     {
         initializeSettings();
-        quitButton.onClick.AddListener(quitGame);
+        quitButton.onClick.AddListener(closeMenu);
     }
 
     void initializeSettings()
@@ -101,7 +103,7 @@ public class SettingsPanel : MonoBehaviour
         slider.onValueChanged.AddListener(index => PlayerPrefs.SetFloat(preferenceKey, index));
     }
 
-    void quitGame()
+    void closeMenu()
     {
         Application.Quit();
     }

@@ -3,20 +3,14 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
 
-    [Header("minigame Information")]
-    [SerializeField] protected string gameName;
-    [SerializeField] protected string[] gameObjective;
-    [SerializeField] protected int objectivesCompleted;
-
+    [SerializeField] string activity = "Example";
     public virtual void Execute(GameObject user)
     {
         return;
     }
 
-    public string getName()
+    public string getActivity()
     {
-        return gameName;
+        return activity;
     }
-
-
 }

@@ -8,14 +8,10 @@ public class pickUp : Interactable
 
     public override void Execute(GameObject user)
     {
-        print(getName());
         pickedUp = true;
-        print(pickedUp);
         if (pickedUp)
         {
-            print(minigameName);
             minigame = GameObject.Find(minigameName);
-            print(minigame.name);
             activity = minigame.gameObject.GetComponent<shredPaper>();
             activity.nextObjective();
             print(activity.currentObjective());

@@ -3,17 +3,23 @@ using UnityEngine;
 public class pickUp : Interactable
 {
     [SerializeField] bool pickedUp = false;
-    shredPaper activity;
+    [SerializeField] string minigameName;
+    minigameTemplate activity;
 
     public override void Execute(GameObject user)
     {
         print(getName());
         pickedUp = true;
         print(pickedUp);
-        minigame = GameObject.Find("shredpaper");
-        activity = minigame.gameObject.GetComponent<shredPaper>();
-        activity.nextObjective();
-        print(activity.currentObjective());
+        if (pickedUp)
+        {
+            print(minigameName);
+            minigame = GameObject.Find(minigameName);
+            print(minigame.name);
+            activity = minigame.gameObject.GetComponent<shredPaper>();
+            activity.nextObjective();
+            print(activity.currentObjective());
+        }
         return;
     }
 

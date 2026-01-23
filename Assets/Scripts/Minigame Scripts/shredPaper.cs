@@ -6,7 +6,7 @@ public class shredPaper : minigameTemplate
     void Start()
     {
         gameName = "Shred Papers";
-        gameObjective = new string[] { "Pick up Papers", "go to Shredder" };
+        gameObjective = new string[] { "Pick up Papers", "go to Shredder"};
     }
 
     // Update is called once per frame

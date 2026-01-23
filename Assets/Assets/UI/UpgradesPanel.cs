@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class UpgradesPanel : MonoBehaviour
 {
-    [SerializeField] private Button closeMenuButton;
+    [SerializeField] private gameManager gameManager;
 
+    [SerializeField] private Button closeMenuButton;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +20,7 @@ public class UpgradesPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            
         
     }
 

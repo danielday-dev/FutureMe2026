@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
 
     public int experience = 0;
     public int level = 0;
+    public int upgradePoints = 0;
     public int gamesToComplete = 0;
     public int daysleft = 5;
     public string[] gamesToday = { "game 1", "game 2", "game 3" };
@@ -34,6 +35,12 @@ public class gameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+    }
+
+    void levelUp()
+    {
+        level++;
+        upgradePoints++;
     }
 
 }

@@ -10,7 +10,7 @@ public class playerMovement : MonoBehaviour
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask whatIsGround;
+    public LayerMask interactableObject;
     bool grounded;
 
     public Transform orientation;
@@ -34,7 +34,7 @@ public class playerMovement : MonoBehaviour
         SpeedControl();
         rb.linearDamping = groundDrag;
         findObjects();
-        
+                
     }
 
     private void FixedUpdate()
@@ -89,6 +89,13 @@ public class playerMovement : MonoBehaviour
         
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(playerCam.transform.position, 1f);
+        Gizmos.DrawWireSphere(playerCam.transform.position + playerCam.transform.forward * 3f, 1f);
+        Gizmos.DrawLine(playerCam.transform.position, playerCam.transform.position + playerCam.transform.forward * 3f);
+    }
+
     private bool tryInteract(out Interactable interactable)
     {
 
@@ -101,7 +108,7 @@ public class playerMovement : MonoBehaviour
         interactable = null;
 
         Vector3 loc = playerCam.transform.position;
-        float radius = 0.5f;
+        float radius = 1f;
 
         //Ray rcast = new Ray(transform.position + rayOffset, playerCam.transform.forward);
 
@@ -115,8 +122,9 @@ public class playerMovement : MonoBehaviour
             }
         }
 
+
         //spherecast adds some leniancy so you dont have to aim well. might be useful for fast moving stuff.
-        if (Physics.SphereCast(playerCam.transform.position, 0.5f, playerCam.transform.forward, out RaycastHit hitObj, 1.2f)) //10f is the interaction distance
+        if (Physics.SphereCast(playerCam.transform.position, 1f, playerCam.transform.forward, out RaycastHit hitObj, 1.2f, interactableObject)) //10f is the interaction distance
         {
             interactable = hitObj.collider.GetComponent<Interactable>();
             if (interactable != null)

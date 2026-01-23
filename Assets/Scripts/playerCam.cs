@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngineInternal;
 
 public class playerCam : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class playerCam : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         
         audioSource.clip = ambientSound;
         audioSource.loop = true;
@@ -32,6 +33,9 @@ public class playerCam : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        yRotation *= PlayerPrefs.GetInt("invertX", 1);
+        xRotation *= PlayerPrefs.GetInt("invertY", 1);
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);

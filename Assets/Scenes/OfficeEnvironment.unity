@@ -13809,7 +13809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361a633075e36e4eb0b26163cf1b98f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradesPanel: {fileID: 0}
+  upgradesPanel: {fileID: 1236703029}
   settingsPanel: {fileID: 1889641306}
 --- !u!1001 &765293800
 PrefabInstance:
@@ -22806,6 +22806,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3897574425332834467, guid: 17aafa66c2e99bb46975556c68d32d1e, type: 3}
   m_PrefabInstance: {fileID: 1236703027}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1236703029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2375551065341325910, guid: 17aafa66c2e99bb46975556c68d32d1e, type: 3}
+  m_PrefabInstance: {fileID: 1236703027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0ecdc8608ae0844a8e183f860c8091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1237136140
 PrefabInstance:
   m_ObjectHideFlags: 0

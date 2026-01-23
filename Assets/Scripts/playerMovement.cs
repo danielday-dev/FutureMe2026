@@ -6,6 +6,7 @@ public class playerMovement : MonoBehaviour
     public float moveSpeed;
 
     public float groundDrag;
+    public Camera playerCam;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -99,7 +100,7 @@ public class playerMovement : MonoBehaviour
          */
         interactable = null;
 
-        Vector3 loc = Camera.main.transform.position;
+        Vector3 loc = playerCam.transform.position;
         float radius = 0.5f;
 
         //Ray rcast = new Ray(transform.position + rayOffset, playerCam.transform.forward);
@@ -115,7 +116,7 @@ public class playerMovement : MonoBehaviour
         }
 
         //spherecast adds some leniancy so you dont have to aim well. might be useful for fast moving stuff.
-        if (Physics.SphereCast(Camera.main.transform.position, 0.5f, Camera.main.transform.forward, out RaycastHit hitObj, 1.2f)) //10f is the interaction distance
+        if (Physics.SphereCast(playerCam.transform.position, 0.5f, playerCam.transform.forward, out RaycastHit hitObj, 1.2f)) //10f is the interaction distance
         {
             interactable = hitObj.collider.GetComponent<Interactable>();
             if (interactable != null)

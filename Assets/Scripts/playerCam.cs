@@ -6,6 +6,8 @@ public class playerCam : MonoBehaviour
     public float sensY;
 
     public Transform orientation;
+    public AudioClip ambientSound;
+    public AudioSource audioSource;
 
     float xRotation;
     float yRotation;
@@ -14,6 +16,10 @@ public class playerCam : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
+        audioSource.clip = ambientSound;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     private void Update()

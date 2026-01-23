@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour
@@ -22,14 +23,20 @@ public class playerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public AudioSource audioSource;
+    public AudioClip[] footStepSounds;
+    private float footstepCD;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        
     }
 
     private void Update()
     {
+        footstepCD -= Time.deltaTime;
         MyInput();
         SpeedControl();
         rb.linearDamping = groundDrag;
@@ -53,6 +60,15 @@ public class playerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+
+        if((Input.GetAxis("Horizontal") != 0f || Input.GetAxis("Vertical") != 0f) && footstepCD < 0f)
+        {
+            int choice = UnityEngine.Random.Range(0,5);
+            AudioClip footStep = footStepSounds[choice];
+            audioSource.PlayOneShot(footStep, 1f);
+            footstepCD =0.5f;
+        }
+
     }
 
     private void SpeedControl()

@@ -51,6 +51,7 @@ public class DialogueManagerScript : MonoBehaviour
     private IEnumerator PlayConversationCoroutine(string[] convo)
     {
         ActiveDialogue = true;
+        DialogueDisplayScript.Instance.DialogueBox.enabled = true;
         foreach (string Line in convo)
         {   
             string CurrentLine = Line;
@@ -96,6 +97,7 @@ public class DialogueManagerScript : MonoBehaviour
         }
         DialogueDisplayScript.Instance.ShowLine("", "main");
         ActiveDialogue = false;
+        DialogueDisplayScript.Instance.DialogueBox.enabled = false;
     }
 
     private IEnumerator WaitForChoice()

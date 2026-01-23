@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DialogueDisplayScript : MonoBehaviour
@@ -15,6 +16,7 @@ public class DialogueDisplayScript : MonoBehaviour
     public TMP_Text ChoiceA;
     public TMP_Text ChoiceB;
     public TMP_Text ChoiceC;
+    public Image DialogueBox;
 
     private TMP_Text TextBox;
 

@@ -9,6 +9,7 @@ public class UpgradeButton : MonoBehaviour
     }
     
     [SerializeField] private Button prerequisiteButton;
+    [SerializeField] private gameManager gameManager;
     [SerializeField] private UpgradeEffect effect;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,10 +26,11 @@ public class UpgradeButton : MonoBehaviour
         Debug.Log("Upgrade Button Pressed");
 
         //check if you have an upgrade point
-        if (true)
+        if (gameManager.upgradePoints > 0)
         {
             GetComponent<Button>().interactable = false;
             activateUpgrade();
+            gameManager.upgradePoints--;
         }
     }
 
